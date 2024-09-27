@@ -22,7 +22,7 @@ export default function AppContextProvider({ children }) {
     setCurrent(category);
     url+=`&category=${category}`
   }
-  
+
     try {
       const res = await fetch(url);
       const data = await res.json();
@@ -41,10 +41,10 @@ export default function AppContextProvider({ children }) {
     setLoading(false);
   };
   // Handle When Next and Previous button are clicked
-  const handlePageChange = (page) => {
-    navigate({search:`?page=${page}`});
-  setPage(page);
-    };
+function handlerPageChange(page) {
+        setPage(page);
+        fetchBlogPosts(page);
+    }
 
   const value = {
     posts,
@@ -58,7 +58,7 @@ export default function AppContextProvider({ children }) {
     totalPages,
     setTotalPages,
     fetchBlogPosts,
-    handlePageChange,
+    handlerPageChange,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
